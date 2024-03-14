@@ -20,19 +20,19 @@ body
         tbody
 script.
   document.addEventListener('DOMContentLoaded', function() {
-    axios.get('/api/ticket').then(function(response) {
-      const tickets = response.data;
+    axios.get('/api/event').then(function(response) {
+      const events = response.data;
       const tableBody = document.querySelector('table tbody');
-      tickets.forEach(t => {
+      events.forEach(t => {
         const row = document.createElement('tr');
-        const ticket = t.ticket
+        const event = t.event
         row.innerHTML = `
           <td>${t.id}</td>
-          <td>${ticket.eventName}</td>
-          <td>${ticket.eventDateTime}</td>
-          <td>${ticket.venue}</td>
-          <td>${ticket.contactPhone}</td>
-          <td>${ticket.seat}</td>
+          <td>${event.eventName}</td>
+          <td>${event.eventDateTime}</td>
+          <td>${event.venue}</td>
+          <td>${event.contactPhone}</td>
+          <td>${event.seat}</td>
           <td>
             <button class="btn btn-primary btn-sm" data-id="${t.id}" onclick="window.location.href='/update/${t.id}'">Update</button>
             <button class="btn btn-danger btn-sm" data-id="${t.id}">Delete</button>
@@ -48,13 +48,13 @@ script.
     // Use event delegation for delete buttons
     document.addEventListener('click', function(event) {
       if (event.target && event.target.classList.contains('btn-danger')) {
-        const ticketId = event.target.getAttribute('data-id');
-        axios.delete(`/api/ticket/${ticketId}`).then(function(response) {
+        const eventId = event.target.getAttribute('data-id');
+        axios.delete(`/api/event/${eventId}`).then(function(response) {
           alert('Deleted successfully', response);
           location.href = '/'
         })
         .catch(function(error) {
-          alert('Error deleting ticket: ' + error);
+          alert('Error deleting event: ' + error);
         });
       }
     });

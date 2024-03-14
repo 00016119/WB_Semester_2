@@ -1,12 +1,22 @@
 [
     {
         "id": "ywLe",
-        "ticket": {
+        "event": {
             "eventName": "Some name",
             "eventDateTime": "14/03/2024 20:16",
             "venue": "Mirabad",
             "contactPhone": "+998999445525",
             "seat": "23"
+        }
+    },
+    {
+        "id": "aT7D",
+        "event": {
+            "eventName": "Some event",
+            "eventDateTime": "18/04/2024 22:21",
+            "venue": "Qashgar",
+            "contactPhone": "+998921233223",
+            "seat": "123"
         }
     }
 ]

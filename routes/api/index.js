@@ -1,9 +1,9 @@
 const express = require('express')
-const ticket_router = require('./ticket')
+const event_router = require('./event')
 
 const router = express.Router()
 
 // registering child routers
-router.use('/ticket', ticket_router)
+router.use('/event', event_router)
 
 module.exports = router

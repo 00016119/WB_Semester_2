@@ -1,49 +1,49 @@
 const fs = require('fs')
 
 // access global mock db file
-const tickets = require(global.mock_db)
+const events = require(global.mock_db)
 
 // write service method implementations
-const ticket_service = {
+const event_service = {
     getAll() {
-        return tickets
+        return events
     },
 	getById(id) {
-        return tickets.find(t => t.id == id)
+        return events.find(t => t.id == id)
     },    
     create(req, res) {
         let new_id = genRandId(4)
                 
-        const ticket = req.body
+        const event = req.body
 
-        const new_ticket = {
+        const new_event = {
             id: new_id,
-            ticket: ticket
+            event: event
         }
 
-        tickets.push(new_ticket)
+        events.push(new_event)
         
-        writeToFile(tickets)
+        writeToFile(events)
         
-        return new_ticket
+        return new_event
     },
     update(id, updateData){
-        const ticketIndex = tickets.findIndex(t => t.id == id)
+        const eventIndex = events.findIndex(t => t.id == id)
 
-        if (ticketIndex === -1) {
+        if (eventIndex === -1) {
             return null
         }
 
-        tickets[ticketIndex].ticket = { ...tickets[ticketIndex].ticket, ...updateData }
+        events[eventIndex].event = { ...events[eventIndex].event, ...updateData }
 
-        writeToFile(tickets)
+        writeToFile(events)
 
-        return tickets[ticketIndex]
+        return events[eventIndex]
     },
     delete(id) {
-        const index = tickets.findIndex(u => u.id == id)
-        tickets.splice(index, 1)    
-        writeToFile(tickets)
+        const index = events.findIndex(u => u.id == id)
+        events.splice(index, 1)    
+        writeToFile(events)
     }
 }
 
@@ -70,4 +70,4 @@ let genRandId = (count) =>{
     return result
 }
 
-module.exports = ticket_service
+module.exports = event_service

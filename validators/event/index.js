@@ -1,7 +1,7 @@
 const { body, param } = require('express-validator');
-const ticket_service = require('../../services/ticket')
+const event_service = require('../../services/event')
 
-const addTicketValidation = () => {
+const addeventValidation = () => {
   return [
     body('eventName')
       .notEmpty().withMessage('Event name must not be empty')
@@ -20,23 +20,23 @@ const addTicketValidation = () => {
   ];
 };
 
-const deleteTicketValidation = () => {
+const deleteeventValidation = () => {
   return [
     param('id').custom(async (id) => {
-      const exists = await ticket_service.getById(id);
+      const exists = await event_service.getById(id);
       if (!exists) {
-        throw new Error('Ticket not found');
+        throw new Error('event not found');
       }
     })
   ];
 };
 
-const updateTicketValidation = () => {
+const updateeventValidation = () => {
   return [
     param('id').custom(async (id) => {
-      const exists = await ticket_service.getById(id);
+      const exists = await event_service.getById(id);
       if (!exists) {
-        throw new Error('Ticket not found');
+        throw new Error('event not found');
       }
     }),
     body('eventName')
@@ -57,7 +57,7 @@ const updateTicketValidation = () => {
 };
 
 module.exports = {
-    addTicketValidation,
-    updateTicketValidation,
-    deleteTicketValidation
+    addeventValidation,
+    updateeventValidation,
+    deleteeventValidation
 };
